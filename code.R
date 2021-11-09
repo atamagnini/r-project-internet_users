@@ -2,7 +2,7 @@ library(tidyverse)
 library(highcharter)
 library(htmlwidgets)
 
-dataset <- read.csv('D:/R scripts/script_051121_internet_users/data.csv', sep = ';', header = T)
+dataset <- read.csv('~/data.csv', sep = ';', header = T)
 df<- as.data.frame(dataset)
 #clean dataset
 colnames(df)[1] <- 'Country'
@@ -20,7 +20,6 @@ df2 <- df[complete.cases(df), ]
 df3 <- df2[df2$X <= 100, ]
 glimpse(df3)
 #map
-#map_data <- get_data_from_map(download_map_data("custom/world"))
 p <- hcmap(map = 'custom/world', download_map_data = getOption("highcharter.download_map_data"), data = df3,
            value = 'X', joinBy = c('name', 'Country')) %>%
   hc_tooltip(useHTML = TRUE, headerFormat = '<b>Percentage of internet users<br>',
